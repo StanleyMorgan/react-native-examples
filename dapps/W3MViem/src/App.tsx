@@ -36,6 +36,7 @@ import {WalletInfoView} from './views/WalletInfoView';
 import {BalanceView} from './views/BalanceView';
 import {NetworkSwitcher} from './views/NetworkSwitcher';
 import {TransactionHistory} from './views/TransactionHistory';
+import {ConnectionStatus} from './views/ConnectionStatus';
 
 // 1. Get projectId at https://dashboard.reown.com
 const projectId = ENV_PROJECT_ID;
@@ -107,6 +108,7 @@ function App(): React.JSX.Element {
             AppKit + Viem
           </Text>
           <FlexView style={styles.buttonContainer}>
+            <ConnectionStatus />
             <WalletInfoView />
             <AppKitButton balance="show" />
             <NetworkButton />
