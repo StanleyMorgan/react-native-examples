@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 
-import {Button} from '@reown/appkit-ui-react-native';
 import {useAccount, useProvider} from '@reown/appkit-react-native';
 import {signMessage} from 'viem';
 import {ToastUtils} from '../utils/ToastUtils';
+import {LoadingButton} from '../components/LoadingButton';
 
 export function SignMessage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -40,8 +40,12 @@ export function SignMessage() {
   };
 
   return isConnected ? (
-    <Button disabled={isLoading} onPress={onPress}>
-      {isLoading ? 'Loading...' : 'Sign message'}
-    </Button>
+    <LoadingButton 
+      isLoading={isLoading} 
+      onPress={onPress}
+      loadingText="Signing..."
+    >
+      Sign message
+    </LoadingButton>
   ) : null;
 }

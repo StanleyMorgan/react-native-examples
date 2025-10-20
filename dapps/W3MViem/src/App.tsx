@@ -33,6 +33,9 @@ import {mainnet, polygon, arbitrum} from './utils/ChainUtils';
 import {storage} from './utils/StorageUtil';
 import {ActionsView} from './views/ActionsView';
 import {WalletInfoView} from './views/WalletInfoView';
+import {BalanceView} from './views/BalanceView';
+import {NetworkSwitcher} from './views/NetworkSwitcher';
+import {TransactionHistory} from './views/TransactionHistory';
 
 // 1. Get projectId at https://dashboard.reown.com
 const projectId = ENV_PROJECT_ID;
@@ -107,7 +110,10 @@ function App(): React.JSX.Element {
             <WalletInfoView />
             <AppKitButton balance="show" />
             <NetworkButton />
+            <BalanceView />
+            <NetworkSwitcher />
             <ActionsView />
+            <TransactionHistory />
           </FlexView>
           <Toast />
           <AppKit />
@@ -121,15 +127,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
-    rowGap: 16,
+    justifyContent: 'flex-start',
+    paddingTop: 60,
+    paddingHorizontal: 20,
   },
   buttonContainer: {
-    gap: 8,
+    gap: 12,
+    width: '100%',
+    maxWidth: 400,
   },
   title: {
-    marginBottom: 40,
-    fontSize: 30,
+    marginBottom: 30,
+    fontSize: 28,
+    textAlign: 'center',
   },
 });
 

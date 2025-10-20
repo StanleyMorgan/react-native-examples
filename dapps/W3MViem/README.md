@@ -9,6 +9,12 @@ This is a React Native example implementing Reown AppKit with Viem integration.
 - **Multi-chain Support**: Ethereum, Polygon, Arbitrum, Solana, and Bitcoin
 - **Wallet Integration**: Support for popular wallets like MetaMask, Phantom, Coinbase, etc.
 - **Transaction Examples**: Sign messages, send transactions, interact with contracts
+- **Enhanced UI Components**: 
+  - Real-time wallet balance display
+  - Network switcher with visual indicators
+  - Transaction history viewer
+  - Loading states and error handling
+  - Improved user experience with better styling
 
 ## Getting Started
 
@@ -66,9 +72,14 @@ src/
 │   ├── wagmigotchiABI.ts  # Example contract ABI
 │   ├── usdtAbi.ts         # USDT contract ABI
 │   └── BitcoinUtil.ts     # Bitcoin utilities
+├── components/
+│   └── LoadingButton.tsx      # Enhanced button with loading states
 └── views/
     ├── ActionsView.tsx        # Main actions container
     ├── WalletInfoView.tsx     # Wallet information display
+    ├── BalanceView.tsx        # Real-time balance display
+    ├── NetworkSwitcher.tsx    # Network switching component
+    ├── TransactionHistory.tsx # Transaction history viewer
     ├── ViemActionsView.tsx    # Viem-specific actions
     ├── SignMessage.tsx        # Sign message functionality
     ├── SendTransaction.tsx    # Send transaction functionality
@@ -99,6 +110,14 @@ src/
 - Phantom (Solana)
 - Coinbase Wallet
 - And many more through AppKit
+
+### Enhanced User Experience
+- **Real-time Balance**: Live wallet balance updates with refresh functionality
+- **Network Switcher**: Easy switching between Ethereum, Polygon, and Arbitrum networks
+- **Transaction History**: View recent transactions with detailed information
+- **Loading States**: Improved UX with loading indicators and disabled states
+- **Error Handling**: Comprehensive error handling with user-friendly messages
+- **Responsive Design**: Better layout and styling for mobile devices
 
 ## Example Usage
 
