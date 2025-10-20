@@ -15,6 +15,7 @@ React Native examples implementing Reown AppKit and WalletKit
 - AppKit + Wagmi + Multichain: `dapps/W3MWagmi`
 - AppKit + Ethers: `dapps/W3MEthers`
 - AppKit + Ethers v5: `dapps/W3MEthers5`
+- AppKit + Viem: `dapps/W3MViem`
 
 ## Getting Started
 
