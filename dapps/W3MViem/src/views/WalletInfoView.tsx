@@ -1,14 +1,14 @@
-import React from 'react';
-import {Image, StyleSheet, StyleProp, ViewStyle} from 'react-native';
-import {useWalletInfo} from '@reown/appkit-react-native';
-import {FlexView, Text} from '@reown/appkit-ui-react-native';
+import React from "react";
+import { Image, StyleSheet, StyleProp, ViewStyle } from "react-native";
+import { useWalletInfo } from "@reown/appkit-react-native";
+import { FlexView, Text } from "@reown/appkit-ui-react-native";
 
 interface Props {
   style?: StyleProp<ViewStyle>;
 }
 
-export function WalletInfoView({style}: Props) {
-  const {walletInfo} = useWalletInfo();
+export function WalletInfoView({ style }: Props) {
+  const { walletInfo } = useWalletInfo();
 
   return walletInfo ? (
     <FlexView style={style} alignItems="center">
@@ -17,7 +17,7 @@ export function WalletInfoView({style}: Props) {
       </Text>
       <FlexView flexDirection="row" alignItems="center">
         {walletInfo?.icons?.[0] && (
-          <Image style={styles.logo} source={{uri: walletInfo?.icons?.[0]}} />
+          <Image style={styles.logo} source={{ uri: walletInfo?.icons?.[0] }} />
         )}
         {walletInfo?.name && (
           <Text variant="small-400">{walletInfo?.name}</Text>

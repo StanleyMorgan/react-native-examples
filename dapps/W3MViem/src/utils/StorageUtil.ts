@@ -1,7 +1,7 @@
-import {MMKV} from 'react-native-mmkv';
+import { MMKV } from "react-native-mmkv";
 
-import {safeJsonParse, safeJsonStringify} from '@walletconnect/safe-json';
-import {Storage} from '@reown/appkit-react-native';
+import { safeJsonParse, safeJsonStringify } from "@walletconnect/safe-json";
+import { Storage } from "@reown/appkit-react-native";
 
 const mmkv = new MMKV();
 
@@ -11,9 +11,9 @@ export const storage: Storage = {
   },
   getEntries: async <T = any>(): Promise<[string, T][]> => {
     const keys = mmkv.getAllKeys();
-    return keys.map(key => [
+    return keys.map((key) => [
       key,
-      safeJsonParse(mmkv.getString(key) ?? '') as T,
+      safeJsonParse(mmkv.getString(key) ?? "") as T,
     ]);
   },
   setItem: async <T = any>(key: string, value: T) => {
@@ -21,7 +21,7 @@ export const storage: Storage = {
   },
   getItem: async <T = any>(key: string): Promise<T | undefined> => {
     const item = mmkv.getString(key);
-    if (typeof item === 'undefined' || item === null) {
+    if (typeof item === "undefined" || item === null) {
       return undefined;
     }
 

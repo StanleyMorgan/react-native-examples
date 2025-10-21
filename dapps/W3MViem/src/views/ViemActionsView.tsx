@@ -1,14 +1,14 @@
-import React from 'react';
-import {useAccount} from '@reown/appkit-react-native';
-import {SignMessage} from './SignMessage';
-import {SendTransaction} from './SendTransaction';
-import {SignTypedDataV4} from './SignTypedDataV4';
-import {ReadContract} from './ReadContract';
-import {WriteContract} from './WriteContract';
+import React from "react";
+import { useAccount } from "@reown/appkit-react-native";
+import { SignMessage } from "./SignMessage";
+import { SendTransaction } from "./SendTransaction";
+import { SignTypedDataV4 } from "./SignTypedDataV4";
+import { ReadContract } from "./ReadContract";
+import { WriteContract } from "./WriteContract";
 
 export function ViemActionsView() {
-  const {namespace} = useAccount();
-  const isEip = namespace === 'eip155';
+  const { namespace } = useAccount();
+  const isEip = namespace === "eip155";
 
   return isEip ? (
     <>

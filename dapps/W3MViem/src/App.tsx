@@ -1,12 +1,12 @@
-import 'text-encoding'; // needed for solana web3js
-import '@walletconnect/react-native-compat';
+import "text-encoding"; // needed for solana web3js
+import "@walletconnect/react-native-compat";
 
-import React, {useEffect} from 'react';
-import {Linking, SafeAreaView, StyleSheet} from 'react-native';
-import Clipboard from '@react-native-clipboard/clipboard';
-import {MMKV} from 'react-native-mmkv';
-import Toast from 'react-native-toast-message';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
+import React, { useEffect } from "react";
+import { Linking, SafeAreaView, StyleSheet } from "react-native";
+import Clipboard from "@react-native-clipboard/clipboard";
+import { MMKV } from "react-native-mmkv";
+import Toast from "react-native-toast-message";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import {
   createAppKit,
@@ -16,27 +16,27 @@ import {
   solana,
   bitcoin,
   NetworkButton,
-} from '@reown/appkit-react-native';
+} from "@reown/appkit-react-native";
 import {
   SolanaAdapter,
   PhantomConnector,
   SolflareConnector,
-} from '@reown/appkit-solana-react-native';
-import {BitcoinAdapter} from '@reown/appkit-bitcoin-react-native';
-import {CoinbaseConnector} from '@reown/appkit-coinbase-react-native';
-import {FlexView, Text} from '@reown/appkit-ui-react-native';
-import {ViemAdapter} from '@reown/appkit-viem-react-native';
-import {handleResponse} from '@coinbase/wallet-mobile-sdk';
-import {ENV_PROJECT_ID} from '@env';
+} from "@reown/appkit-solana-react-native";
+import { BitcoinAdapter } from "@reown/appkit-bitcoin-react-native";
+import { CoinbaseConnector } from "@reown/appkit-coinbase-react-native";
+import { FlexView, Text } from "@reown/appkit-ui-react-native";
+import { WagmiAdapter } from "@reown/appkit-wagmi-react-native";
+import { handleResponse } from "@coinbase/wallet-mobile-sdk";
+import { ENV_PROJECT_ID } from "@env";
 
-import {mainnet, polygon, arbitrum} from './utils/ChainUtils';
-import {storage} from './utils/StorageUtil';
-import {ActionsView} from './views/ActionsView';
-import {WalletInfoView} from './views/WalletInfoView';
-import {BalanceView} from './views/BalanceView';
-import {NetworkSwitcher} from './views/NetworkSwitcher';
-import {TransactionHistory} from './views/TransactionHistory';
-import {ConnectionStatus} from './views/ConnectionStatus';
+import { mainnet, polygon, arbitrum } from "viem/chains";
+import { storage } from "./utils/StorageUtil";
+import { ActionsView } from "./views/ActionsView";
+import { WalletInfoView } from "./views/WalletInfoView";
+import { BalanceView } from "./views/BalanceView";
+import { NetworkSwitcher } from "./views/NetworkSwitcher";
+import { TransactionHistory } from "./views/TransactionHistory";
+import { ConnectionStatus } from "./views/ConnectionStatus";
 
 // 1. Get projectId at https://dashboard.reown.com
 const projectId = ENV_PROJECT_ID;
@@ -46,12 +46,12 @@ const networks = [mainnet, polygon, arbitrum, solana, bitcoin];
 
 // 3. Create config
 const metadata = {
-  name: 'AppKit Viem',
-  description: 'AppKit with Viem',
-  url: 'https://reown.com/appkit',
-  icons: ['https://avatars.githubusercontent.com/u/179229932'],
+  name: "AppKit Viem",
+  description: "AppKit with Viem",
+  url: "https://reown.com/appkit",
+  icons: ["https://avatars.githubusercontent.com/u/179229932"],
   redirect: {
-    native: 'rn-w3m-viem-sample://',
+    native: "rn-w3m-viem-sample://",
   },
 };
 
@@ -62,7 +62,7 @@ const clipboardClient = {
 };
 
 const adapters = [
-  new ViemAdapter(),
+  new WagmiAdapter(),
   new SolanaAdapter(),
   new BitcoinAdapter(),
 ];
@@ -79,7 +79,7 @@ const appKit = createAppKit({
   extraConnectors: [
     new PhantomConnector(),
     new SolflareConnector(),
-    new CoinbaseConnector({storage: new MMKV()}),
+    new CoinbaseConnector({ storage: new MMKV() }),
   ],
   features: {
     swaps: true,
@@ -90,7 +90,7 @@ const appKit = createAppKit({
 function App(): React.JSX.Element {
   // Coinbase sdk setup
   useEffect(() => {
-    const sub = Linking.addEventListener('url', ({url}) => {
+    const sub = Linking.addEventListener("url", ({ url }) => {
       const handledBySdk = handleResponse(new URL(url));
       if (!handledBySdk) {
         // Handle other deeplinks
@@ -128,20 +128,20 @@ function App(): React.JSX.Element {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'flex-start',
+    alignItems: "center",
+    justifyContent: "flex-start",
     paddingTop: 60,
     paddingHorizontal: 20,
   },
   buttonContainer: {
     gap: 12,
-    width: '100%',
+    width: "100%",
     maxWidth: 400,
   },
   title: {
     marginBottom: 30,
     fontSize: 28,
-    textAlign: 'center',
+    textAlign: "center",
   },
 });
 

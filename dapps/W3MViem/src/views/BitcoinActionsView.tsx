@@ -1,47 +1,47 @@
-import React from 'react';
-import {StyleSheet} from 'react-native';
-import {Button, Text, FlexView} from '@reown/appkit-ui-react-native';
-import {useAccount, useProvider} from '@reown/appkit-react-native';
+import React from "react";
+import { StyleSheet } from "react-native";
+import { Button, Text, FlexView } from "@reown/appkit-ui-react-native";
+import { useAccount, useProvider } from "@reown/appkit-react-native";
 
-import {ToastUtils} from '../utils/ToastUtils';
-import {BitcoinUtil, SignPSBTResponse} from '../utils/BitcoinUtil';
+import { ToastUtils } from "../utils/ToastUtils";
+import { BitcoinUtil, SignPSBTResponse } from "../utils/BitcoinUtil";
 
 export function BitcoinActionsView() {
   const isConnected = true;
-  const {address, namespace, chainId} = useAccount();
-  const {provider} = useProvider();
+  const { address, namespace, chainId } = useAccount();
+  const { provider } = useProvider();
 
   const onSignSuccess = (data: string) => {
-    ToastUtils.showSuccessToast('Sign successful', data);
+    ToastUtils.showSuccessToast("Sign successful", data);
   };
 
   const onSignError = (error: Error) => {
-    ToastUtils.showErrorToast('Sign failed', error.message);
+    ToastUtils.showErrorToast("Sign failed", error.message);
   };
 
   const signMessage = async () => {
     try {
       if (!provider) {
-        ToastUtils.showErrorToast('Sign failed', 'No provider found');
+        ToastUtils.showErrorToast("Sign failed", "No provider found");
 
         return;
       }
 
       if (!address) {
-        ToastUtils.showErrorToast('Sign failed', 'No address found');
+        ToastUtils.showErrorToast("Sign failed", "No address found");
 
         return;
       }
 
-      const message = 'Hello from AppKit Bitcoin';
+      const message = "Hello from AppKit Bitcoin";
 
-      const {signature} = (await provider.request({
-        method: 'signMessage',
-        params: {message, account: address, address, protocol: 'ecdsa'},
-      })) as {address: string; signature: string};
+      const { signature } = (await provider.request({
+        method: "signMessage",
+        params: { message, account: address, address, protocol: "ecdsa" },
+      })) as { address: string; signature: string };
 
-      const formattedSignature = Buffer.from(signature, 'hex').toString(
-        'base64',
+      const formattedSignature = Buffer.from(signature, "hex").toString(
+        "base64"
       );
 
       onSignSuccess(formattedSignature);
@@ -53,21 +53,21 @@ export function BitcoinActionsView() {
   const signPsbt = async () => {
     try {
       if (!provider) {
-        ToastUtils.showErrorToast('Sign failed', 'No provider found');
+        ToastUtils.showErrorToast("Sign failed", "No provider found");
 
         return;
       }
 
       if (!address) {
-        ToastUtils.showErrorToast('Sign failed', 'No address found');
+        ToastUtils.showErrorToast("Sign failed", "No address found");
 
         return;
       }
 
-      if (namespace !== 'bip122') {
+      if (namespace !== "bip122") {
         ToastUtils.showErrorToast(
-          'Sign failed',
-          'The selected chain is not bip122',
+          "Sign failed",
+          "The selected chain is not bip122"
         );
 
         return;
@@ -75,7 +75,7 @@ export function BitcoinActionsView() {
 
       const utxos = await BitcoinUtil.getUTXOs(
         address,
-        `${namespace}:${chainId}`,
+        `${namespace}:${chainId}`
       );
       const feeRate = await BitcoinUtil.getFeeRate();
 
@@ -91,7 +91,7 @@ export function BitcoinActionsView() {
       params.broadcast = false;
 
       const response = (await provider.request({
-        method: 'signPsbt',
+        method: "signPsbt",
         params: {
           account: address,
           psbt: params.psbt,
@@ -102,7 +102,7 @@ export function BitcoinActionsView() {
 
       onSignSuccess(`${response.psbt}-${response.txid}`);
     } catch (error) {
-      console.log('error', error);
+      console.log("error", error);
       onSignError(error as Error);
     }
   };

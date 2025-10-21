@@ -1,15 +1,15 @@
-import React, {useState, useEffect} from 'react';
-import {StyleSheet} from 'react-native';
-import {Text, FlexView, Button} from '@reown/appkit-ui-react-native';
-import {useAccount, useProvider} from '@reown/appkit-react-native';
-import {getBalance, formatEther} from 'viem';
-import {ToastUtils} from '../utils/ToastUtils';
+import React, { useState, useEffect } from "react";
+import { StyleSheet } from "react-native";
+import { Text, FlexView, Button } from "@reown/appkit-ui-react-native";
+import { useAccount, useProvider } from "@reown/appkit-react-native";
+import { getBalance, formatEther } from "viem";
+import { ToastUtils } from "../utils/ToastUtils";
 
 export function BalanceView() {
-  const [balance, setBalance] = useState<string>('0');
+  const [balance, setBalance] = useState<string>("0");
   const [isLoading, setIsLoading] = useState(false);
-  const {isConnected, address, chainId} = useAccount();
-  const {provider} = useProvider();
+  const { isConnected, address, chainId } = useAccount();
+  const { provider } = useProvider();
 
   const fetchBalance = async () => {
     if (!isConnected || !provider || !address) {
@@ -24,8 +24,11 @@ export function BalanceView() {
       const balanceEth = formatEther(balanceWei);
       setBalance(parseFloat(balanceEth).toFixed(4));
     } catch (error) {
-      ToastUtils.showErrorToast('Balance fetch failed', 'Could not fetch balance');
-      console.error('Error fetching balance:', error);
+      ToastUtils.showErrorToast(
+        "Balance fetch failed",
+        "Could not fetch balance"
+      );
+      console.error("Error fetching balance:", error);
     } finally {
       setIsLoading(false);
     }
@@ -35,7 +38,7 @@ export function BalanceView() {
     if (isConnected && address) {
       fetchBalance();
     } else {
-      setBalance('0');
+      setBalance("0");
     }
   }, [isConnected, address, chainId]);
 
@@ -50,11 +53,11 @@ export function BalanceView() {
       </Text>
       <FlexView style={styles.balanceContainer}>
         <Text variant="large-600" style={styles.balance}>
-          {isLoading ? 'Loading...' : `${balance} ETH`}
+          {isLoading ? "Loading..." : `${balance} ETH`}
         </Text>
-        <Button 
-          variant="outline" 
-          size="small" 
+        <Button
+          variant="outline"
+          size="small"
           onPress={fetchBalance}
           disabled={isLoading}
         >
@@ -69,20 +72,20 @@ const styles = StyleSheet.create({
   container: {
     marginVertical: 16,
     padding: 16,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: "#f5f5f5",
     borderRadius: 8,
     gap: 8,
   },
   title: {
-    textAlign: 'center',
+    textAlign: "center",
   },
   balanceContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   balance: {
-    color: '#007AFF',
-    fontWeight: 'bold',
+    color: "#007AFF",
+    fontWeight: "bold",
   },
 });

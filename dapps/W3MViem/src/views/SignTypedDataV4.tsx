@@ -1,22 +1,22 @@
-import React, {useState} from 'react';
-import {Button} from '@reown/appkit-ui-react-native';
-import {useAccount, useProvider} from '@reown/appkit-react-native';
-import {signTypedData} from 'viem';
+import React, { useState } from "react";
+import { Button } from "@reown/appkit-ui-react-native";
+import { useAccount, useProvider } from "@reown/appkit-react-native";
+import { signTypedData } from "viem";
 
-import {eip712} from '../utils/eip712';
-import {ToastUtils} from '../utils/ToastUtils';
+import { eip712 } from "../utils/eip712";
+import { ToastUtils } from "../utils/ToastUtils";
 
 export function SignTypedDataV4() {
   const [isLoading, setIsLoading] = useState(false);
-  const {provider} = useProvider();
-  const {isConnected, address} = useAccount();
+  const { provider } = useProvider();
+  const { isConnected, address } = useAccount();
 
   const onSuccess = (data: any) => {
-    ToastUtils.showSuccessToast('Sign successful', data);
+    ToastUtils.showSuccessToast("Sign successful", data);
   };
 
   const onError = (error: Error) => {
-    ToastUtils.showErrorToast('Sign failed', error.message);
+    ToastUtils.showErrorToast("Sign failed", error.message);
   };
 
   const onPress = async () => {
@@ -38,7 +38,7 @@ export function SignTypedDataV4() {
       onSuccess(signature);
     } catch (e) {
       console.log(e);
-      onError(new Error('Error signing typed data'));
+      onError(new Error("Error signing typed data"));
     } finally {
       setIsLoading(false);
     }
@@ -46,7 +46,7 @@ export function SignTypedDataV4() {
 
   return isConnected ? (
     <Button disabled={isLoading} onPress={onPress}>
-      {isLoading ? 'Loading...' : 'Sign typed data'}
+      {isLoading ? "Loading..." : "Sign typed data"}
     </Button>
   ) : null;
 }

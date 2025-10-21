@@ -1,6 +1,6 @@
-import React from 'react';
-import {ActivityIndicator, StyleSheet} from 'react-native';
-import {Button, ButtonProps} from '@reown/appkit-ui-react-native';
+import React from "react";
+import { ActivityIndicator, StyleSheet } from "react-native";
+import { Button, ButtonProps } from "@reown/appkit-ui-react-native";
 
 interface LoadingButtonProps extends ButtonProps {
   isLoading?: boolean;
@@ -9,7 +9,7 @@ interface LoadingButtonProps extends ButtonProps {
 
 export function LoadingButton({
   isLoading = false,
-  loadingText = 'Loading...',
+  loadingText = "Loading...",
   children,
   disabled,
   ...props
@@ -21,9 +21,9 @@ export function LoadingButton({
       style={[styles.button, props.style]}
     >
       {isLoading ? (
-        <ActivityIndicator 
-          size="small" 
-          color={props.variant === 'main' ? '#fff' : '#007AFF'} 
+        <ActivityIndicator
+          size="small"
+          color={props.variant === "main" ? "#fff" : "#007AFF"}
         />
       ) : (
         children
@@ -37,9 +37,9 @@ export function LoadingButton({
 
 const styles = StyleSheet.create({
   button: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
     gap: 8,
   },
   loadingText: {

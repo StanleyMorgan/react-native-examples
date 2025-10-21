@@ -1,23 +1,23 @@
-import React from 'react';
-import {StyleSheet} from 'react-native';
-import {FlexView} from '@reown/appkit-ui-react-native';
-import {useAccount} from '@reown/appkit-react-native';
+import React from "react";
+import { StyleSheet } from "react-native";
+import { FlexView } from "@reown/appkit-ui-react-native";
+import { useAccount } from "@reown/appkit-react-native";
 
-import {SolanaActionsView} from './SolanaActionsView';
-import {ViemActionsView} from './ViemActionsView';
-import {BitcoinActionsView} from './BitcoinActionsView';
+import { SolanaActionsView } from "./SolanaActionsView";
+import { ViemActionsView } from "./ViemActionsView";
+import { BitcoinActionsView } from "./BitcoinActionsView";
 
 export function ActionsView() {
-  const {chainId, namespace} = useAccount();
+  const { chainId, namespace } = useAccount();
   const isConnected = !!chainId;
 
   return isConnected ? (
     <FlexView style={styles.container}>
-      {namespace === 'eip155' ? (
+      {namespace === "eip155" ? (
         <ViemActionsView />
-      ) : namespace === 'solana' ? (
+      ) : namespace === "solana" ? (
         <SolanaActionsView />
-      ) : namespace === 'bip122' ? (
+      ) : namespace === "bip122" ? (
         <BitcoinActionsView />
       ) : null}
     </FlexView>
